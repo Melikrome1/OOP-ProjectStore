@@ -1,0 +1,75 @@
+:root {
+    background-image: url("bullets.jpg");
+}
+
+body {
+    background-color: black;
+    height: 6vh;
+}
+
+.container {
+    height: 35vh;
+    display: flex;
+    align-items: center;
+}
+
+.row {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+#navbar {
+    margin-top: auto;
+}
+
+.product-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    background-color: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+.product-box h3, .product-box p {
+    margin: 0;
+}
+.add-to-cart-btn {
+    margin-top: 10px;
+}
+
+.transaction-box {
+    background-color: goldenrod;
+    padding: 20px;
+    margin-bottom: 20px;
+    color: black;
+    display: inline-block;
+    width: 30px;
+    height: 300px;
+}
+
+.add-to-cart-btn {
+    background-color: #337ab7;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.add-to-cart-btn:hover {
+    background-color: #286090;
+}
+
+@media (min-width: 576px) {
+    .product-box {
+        margin-right: 15px;
+        margin-left: 15px;
+    }
+}
+
+
+
+
+
