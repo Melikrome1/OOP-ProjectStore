@@ -111,7 +111,7 @@ class Shop {
   }
 }
 
-// Create an instance of the Shop class
+// instance of the Shop class
 const shop = new Shop();
 const user = new User('Cynthia', 18);
 
@@ -124,7 +124,7 @@ function addToCart(name: string, price: number): void {
     console.log(`Item not found in the shop.`);
   }
 }
-
+//remove from cart function
 function removeFromCart(name: string, price: number): void {
   const item = user.cart.find((item) => item.name.toLowerCase() === name.toLowerCase() && item.price <= price);
   if (item) {
@@ -134,7 +134,7 @@ function removeFromCart(name: string, price: number): void {
     console.log(`Item not found in the cart.`);
   }
 }
-
+//checkout
 function checkout(): void {
   console.log(`Checking out...`);
   user.printCart();
@@ -142,11 +142,6 @@ function checkout(): void {
   console.log(`Cart cleared.`);
 }
 
-// Example usage
-addToCart('Item 1', 10);
-addToCart('Item 2', 20);
-removeFromCart('Item 1', 10);
-checkout();
 
 
 
