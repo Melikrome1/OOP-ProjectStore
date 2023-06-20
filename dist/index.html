@@ -1,89 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shopping Cart</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
-    <script src="bundle.js"></script>
-</head>
-<body>
-    <div class="canvas-container">
-        <div class="container">
-            <div class="row" id="navbar">
-                <div class="col-4" id="main-title"><a href="#" style="color: goldenrod;">My Ammunition Shop</a></div>
-            </div>
-        </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-9">
-                    <!-- Product items -->
-                    <div class="row">
-                        <!-- Item 1 -->
-                        <div class="col product-box">
-                            <h3>9mm Luger</h3>
-                            <p>Price: $20 a box (50r)</p>
-                            <p>9mm Luger ammunition is one of the most popular cartridges in the world and is commonly used in pistols such as the Glock 19 and the Smith & Wesson M&P. It is known for its accuracy, reliability, and low recoil, making it a popular choice for target shooting, self-defense, and law enforcement. A popular brand of 9mm Luger ammunition is Federal HST, which is known for producing high-quality ammunition for self-defense and law enforcement.</p>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
-                        <!-- Item 2 -->
-                        <div class="col product-box">
-                            <h3>40 S&W</h3>
-                            <p>Price: $20 a box (50r)</p>
-                            <p>.40 S&W ammunition is a popular cartridge that is commonly used in pistols such as the Glock 23 and the Smith & Wesson M&P. It is known for its accuracy and stopping power, making it a popular choice for law enforcement and self-defense. A popular brand of .40 S&W ammunition is Speer Gold Dot, which is known for producing high-quality ammunition for law enforcement and self-defense.</p>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
-                        <!-- Item 3 -->
-                        <div class="col product-box">
-                            <h3>.45 ACP</h3>
-                            <p>Price: $30 a box (50r)</p>
-                            <p>.45 ACP ammunition is a powerful cartridge that is commonly used in pistols such as the Colt 1911 and the Glock 21. It is known for its stopping power and is popular among law enforcement and military personnel. A popular brand of .45 ACP ammunition is Winchester Ranger, which is known for producing high-quality ammunition for self-defense and law enforcement.</p>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
-                    </div>
-                    
-                    <div class="row">
-                        <!-- Item 4 -->
-                        <div class="col product-box">
-                            <h3>.357 SIG</h3>
-                            <p>Price: $30 a box (50r)</p>
-                            <p>.357 SIG ammunition is a high-velocity cartridge that is known for its accuracy and stopping power. It is commonly used in pistols such as the Glock 31 and the SIG Sauer P229. A popular brand of .357 SIG ammunition is Hornady Critical Duty, which is known for producing high-quality ammunition for law enforcement and self-defense.</p>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
-                        <!-- Item 5 -->
-                        <div class="col product-box">
-                            <h3>30-06 Springfield</h3>
-                            <p>Price: $20 a box (50r)</p>
-                            <p>.30-06 Springfield ammunition is a popular cartridge for hunting and long-range shooting. It is commonly used in rifles such as the M1 Garand and the Springfield Model 1903. A popular brand of .30-06 Springfield ammunition is Remington Core-Lokt, which is known for producing high-quality ammunition for hunting big game such as deer and elk.</p>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
-                        <!-- Item 6 -->
-                        <div class="col product-box">
-                            <h3>.223 Remington</h3>
-                            <p>Price: $20 a box (50r)</p>
-                            <p>.223 Remington ammunition is commonly used in rifles such as the AR-15, and is known for its accuracy and reliability. A popular brand of .223 Remington ammunition is Federal Premium, which is known for producing high-quality ammunition for hunting, competition shooting, and self-defense.</p>
-                            <button class="add-to-cart-btn">Add to Cart</button>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="col-3 transaction-box">
-                    <!-- Cart information -->
-                    <h2>Transaction</h2>
-                    <p>Cynthia's Cart:</p>
-                    <ul>
-                        <li>9mm Luger: $20</li>
-                        <li>40 S&W: $20</li>
-                        <li>40 S&W: $20</li>
-                    </ul>
-                    <p>Cart Total: $60</p>
-                </div>
-                
-            </div>
-        </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+  <script src="dist/bundle.js"></script>
+
+  <script>
+    function addToCart(name, price) {
+      const item = {
+        name: name,
+        price: price
+      };
+      user.addToCart(item);
+      updateCartInfo();
+      updateCartItems();
+    }
+
+    function checkout() {
+      user.printCart();
+      user.clearCart();
+      updateCartInfo();
+      updateCartItems();
+    }
+
+    class Shop {
+      constructor() {
+        this.items = [];
+      }
+    }
+
+    class User {
+      constructor(name, age) {
+        this.name = name;
+        this.age = age;
+        this.cart = [];
+      }
+
+      addToCart(item) {
+        this.cart.push(item);
+      }
+
+      cartTotal() {
+        return this.cart.reduce((total, item) => total + item.price, 0);
+      }
+
+      clearCart() {
+        this.cart = [];
+      }
+
+      printCart() {
+        console.log("Items in cart:");
+        for (const item of this.cart) {
+          console.log(`${item.name}: $${item.price}`);
+        }
+      }
+    }
+
+    const shop = new Shop();
+    const user = new User("Cynthia", 18);
+
+    function updateCartInfo() {
+      const cartInfo = document.getElementById("cart-info");
+      const cartTotal = document.getElementById("cart-total");
+      cartInfo.textContent = `Items in Cart: ${user.cart.length}`;
+      cartTotal.textContent = `Cart Total: $${user.cartTotal()}`;
+    }
+
+    function updateCartItems() {
+      const cartItems = document.getElementById("cart-items");
+      cartItems.innerHTML = "";
+      for (const item of user.cart) {
+        const li = document.createElement("li");
+        li.textContent = `${item.name}: $${item.price}`;
+        cartItems.appendChild(li);
+      }
+    }
+
+    window.addEventListener("DOMContentLoaded", () => {
+      updateCartInfo();
+      updateCartItems();
+    });
+  </script>
+</head>
+
+<body>
+  <div class="canvas-container">
+    <div class="container">
+      <div class="row" id="navbar">
+        <div class="col-4" id="main-title"><a href="#" style="color: goldenrod;">My Ammunition Shop</a></div>
+      </div>
     </div>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-9">
+          <!-- Product items -->
+          <div class="row">
+            <!-- Item 1 -->
+            <div class="col product-box">
+              <h3>9mm Luger</h3>
+              <p>Price: $20 a box (50r)</p>
+              <p>9mm Luger ammunition is one of the most popular cartridges in the world and is commonly used in pistols such as the Glock 19 and the Smith &amp; Wesson M&amp;P. It is known for its accuracy, reliability, and low recoil, making it a popular choice for target shooting, self-defense, and law enforcement. A popular brand of 9mm Luger ammunition is Federal HST, which is known for producing high-quality ammunition for self-defense and law enforcement.</p>
+              <button class="add-to-cart-btn" id="add-to-cart-1" onclick="addToCart('9mm Luger', 20)">Add to Cart</button>
+            </div>
+            <!-- Item 2 -->
+            <div class="col product-box">
+              <h3>40 S&amp;W</h3>
+              <p>Price: $20 a box (50r)</p>
+              <p>.40 S&amp;W ammunition is a popular cartridge that is commonly used in pistols such as the Glock 23 and the Smith &amp; Wesson M&amp;P. It is known for its accuracy and stopping power, making it a popular choice for law enforcement and self-defense. A popular brand of .40 S&amp;W ammunition is Speer Gold Dot, which is known for producing high-quality ammunition for law enforcement and self-defense.</p>
+              <button class="add-to-cart-btn" id="add-to-cart-2" onclick="addToCart('40 S&amp;W', 20)">Add to Cart</button>
+            </div>
+            <!-- Item 3 -->
+            <div class="col product-box">
+              <h3>.45 ACP</h3>
+              <p>Price: $30 a box (50r)</p>
+              <p>.45 ACP ammunition is a powerful cartridge that is commonly used in pistols such as the Colt 1911 and the Glock 21. It is known for its stopping power and is popular among law enforcement and military personnel. A popular brand of .45 ACP ammunition is Winchester Ranger, which is known for producing high-quality ammunition for self-defense and law enforcement.</p>
+              <button class="add-to-cart-btn" id="add-to-cart-3" onclick="addToCart('.45 ACP', 30)">Add to Cart</button>
+            </div>
+          </div>
+          <div class="row">
+            <!-- Item 4 -->
+            <div class="col product-box">
+              <h3>.357 SIG</h3>
+              <p>Price: $30 a box (50r)</p>
+              <p>.357 SIG ammunition is a high-velocity cartridge that is known for its accuracy and stopping power. It is commonly used in pistols such as the Glock 31 and the SIG Sauer P229. A popular brand of .357 SIG ammunition is Hornady Critical Duty, which is known for producing high-quality ammunition for law enforcement and self-defense.</p>
+              <button class="add-to-cart-btn" id="add-to-cart-4" onclick="addToCart('.357 SIG', 30)">Add to Cart</button>
+            </div>
+            <!-- Item 5 -->
+            <div class="col product-box">
+              <h3>30-06 Springfield</h3>
+              <p>Price: $20 a box (50r)</p>
+              <p>.30-06 Springfield ammunition is a popular cartridge for hunting and long-range shooting. It is commonly used in rifles such as the M1 Garand and the Springfield Model 1903. A popular brand of .30-06 Springfield ammunition is Remington Core-Lokt, which is known for producing high-quality ammunition for hunting big game such as deer and elk.</p>
+              <button class="add-to-cart-btn" id="add-to-cart-5" onclick="addToCart('30-06 Springfield', 20)">Add to Cart</button>
+            </div>
+            <!-- Item 6 -->
+            <div class="col product-box">
+              <h3>.223 Remington</h3>
+              <p>Price: $20 a box (50r)</p>
+              <p>.223 Remington ammunition is commonly used in rifles such as the AR-15, and is known for its accuracy and reliability. A popular brand of .223 Remington ammunition is Federal Premium, which is known for producing high-quality ammunition for hunting, competition shooting, and self-defense.</p>
+              <button class="add-to-cart-btn" id="add-to-cart-6" onclick="addToCart('.223 Remington', 20)">Add to Cart</button>
+            </div>
+          </div>
+        </div>
+        <div class="col-3 transaction-box">
+          <!-- Cart information -->
+          <h2>Transaction</h2>
+          <p id="cart-info"></p>
+          <ul id="cart-items">
+            <!-- Cart items will be dynamically added here -->
+          </ul>
+          <p id="cart-total"></p>
+          <button id="checkout-btn" onclick="checkout()">Check Out</button>
+
+          <p id="cart-total"></p>
+          <button id="remove-btn" onclick="checkout()">Remove</button>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
+
 </html>
+
 

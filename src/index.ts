@@ -73,8 +73,10 @@ class User {
       this._cart.splice(itemIndex, quantity);
     }
   }
-  
-  
+
+  clearCart(): void {
+    this._cart = [];
+  }
 
   cartTotal(): number {
     let total = 0;
@@ -85,10 +87,11 @@ class User {
   }
 
   printCart(): void {
-    console.log(`User ${this._name}'s Cart:`);
+    console.log('Cart Items:');
     for (const item of this._cart) {
       console.log(`- ${item.name}: $${item.price}`);
     }
+    console.log(`Cart Total: $${this.cartTotal()}`);
   }
 }
 
@@ -108,21 +111,42 @@ class Shop {
   }
 }
 
-
+// Create an instance of the Shop class
 const shop = new Shop();
 const user = new User('Cynthia', 18);
 
-user.addToCart(shop.items[0]);
-user.addToCart(shop.items[1]);
-user.addToCart(shop.items[1]);
-user.addToCart(shop.items[2]);
+function addToCart(name: string, price: number): void {
+  const item = shop.items.find((item) => item.name.toLowerCase() === name.toLowerCase() && item.price <= price);
+  if (item) {
+    user.addToCart(item);
+    console.log(`Added ${item.name} to cart. Cart Total: $${user.cartTotal()}`);
+  } else {
+    console.log(`Item not found in the shop.`);
+  }
+}
 
-user.printCart(); 
+function removeFromCart(name: string, price: number): void {
+  const item = user.cart.find((item) => item.name.toLowerCase() === name.toLowerCase() && item.price <= price);
+  if (item) {
+    user.removeFromCart(item);
+    console.log(`Removed ${item.name} from cart. Cart Total: $${user.cartTotal()}`);
+  } else {
+    console.log(`Item not found in the cart.`);
+  }
+}
 
-user.removeFromCart(shop.items[1]); 
+function checkout(): void {
+  console.log(`Checking out...`);
+  user.printCart();
+  user.clearCart();
+  console.log(`Cart cleared.`);
+}
 
-user.removeQuantityFromCart(shop.items[0], 2);
+// Example usage
+addToCart('Item 1', 10);
+addToCart('Item 2', 20);
+removeFromCart('Item 1', 10);
+checkout();
 
-console.log(`Cart Total: $${user.cartTotal()}`);
 
 

@@ -4,7 +4,7 @@
 
 body {
     background-color: black;
-    height: 6vh;
+    height: 22vh;
 }
 
 .container {
@@ -46,7 +46,7 @@ body {
     color: black;
     display: inline-block;
     width: 30px;
-    height: 300px;
+    height: 1055px;
 }
 
 .add-to-cart-btn {
